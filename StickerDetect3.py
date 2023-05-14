@@ -19,7 +19,7 @@ while(True):
     kernel = np.ones((5,5),np.float32)/25
     img = cv2.filter2D(img,-1,kernel)
     GreenLower = np.array([0])
-    GreenUpper = np.array([70])
+    GreenUpper = np.array([95])
     img_mask = cv2.inRange(img_gry,GreenLower,GreenUpper)
 
     img_edge = cv2.Canny(img_mask,900,1000)
@@ -37,13 +37,13 @@ while(True):
           (x,y,w,h) = cv2.boundingRect(i)
           copymask = img_mask[y:y+h, x:x+w]
           ratio = cv2.countNonZero(copymask)/copymask.size
-          cv2.drawContours(frame, [i], -1, (255, 255, 255), 2)
-          if(w/h < 1.9 and w/h > 0.98 and w < 65):
-            if(ratio > 0.66 and w*h < 850 and w*h > 200):
+          #cv2.drawContours(frame, [i], -1, (255, 255, 255), 2)
+          if(w/h < 1.4 and w/h > 0.98 and w < 75):
+            if(ratio > 0.66 and w*h < 600 and w*h > 200):
               cv2.rectangle(frame, (x,y), (x+w,y+h), (255, 255, 0), 2)
               cv2.putText(frame, "empty", (cx - 50, cy - 10),
                       cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
-            elif (ratio < 0.9 and ratio > 0.1 and w > 15 and h > 15 and w*h >= 700):
+            elif (ratio < 0.9 and ratio > 0.1 and w > 15 and h > 15 and w*h >= 600):
               cv2.rectangle(frame, (x,y), (x+w,y+h), (0, 255, 0), 2)
               cv2.putText(frame, "Placed", (cx - 50, cy - 10),
                       cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
