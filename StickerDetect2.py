@@ -19,7 +19,7 @@ while(True):
     kernel = np.ones((5,5),np.float32)/25
     img = cv2.filter2D(img,-1,kernel)
     GreenLower = np.array([0])
-    GreenUpper = np.array([70])
+    GreenUpper = np.array([80])
     img_mask = cv2.inRange(img_gry,GreenLower,GreenUpper)
 
     img_edge = cv2.Canny(img_mask,900,1000)
@@ -40,7 +40,7 @@ while(True):
           #cv2.drawContours(frame, [i], -1, (255, 255, 255), 2)
           if(w/h < 1.9 and w/h > 0.98 and w < 35):
             if(ratio > 0.66 and w*h < 700 and w*h > 200):
-              cv2.rectangle(frame, (x,y), (x+w,y+h), (255, 255, 0), 2)
+              cv2.rectangle(frame, (x,y), (x+w,y+h), (0, 255, 255), 2)
               cv2.putText(frame, "empty", (cx - 50, cy - 10),
                       cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
             elif (ratio < 0.9 and ratio > 0.3 and w > 15 and h > 15 and w*h >= 700):
